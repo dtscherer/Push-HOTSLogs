@@ -1,8 +1,6 @@
 
 # coding: utf-8
 
-# In[ ]:
-
 import webbrowser
 from pushbullet import Pushbullet
 import pickle
@@ -13,9 +11,6 @@ from bs4 import BeautifulSoup
 
 #Resources
 #https://github.com/randomchars/pushbullet.py
-
-
-# In[ ]:
 
 # Declare variables
 
@@ -30,12 +25,11 @@ file_name = 'variables.txt'
 target_file = directory + file_name
 
 # Determine files in directory
-directory_files = os.listdir(os.getcwd())
+directory_files = os.listdir(os.path.dirname(os.path.realpath(__file__)))
 
-
-# In[ ]:
 
 def get_hero_list():
+    """Scrape the front page of HOTSLogs for a current list of heroes."""
     url = 'https://www.hotslogs.com/Default'
     heroes = []
     # get website content
@@ -53,6 +47,7 @@ def get_hero_list():
     return sorted(heroes)
 
 def parse_hero_name(hero):
+    """Parse and converts the hero's name into the proper case."""
     name = ''
     hero = hero.lower()
     for i in range(0,len(hero)):
@@ -71,6 +66,7 @@ def parse_hero_name(hero):
 
 
 def parse_device_options(hero_string, options):
+    """Parses out the modifier options in a command."""
     if hero_string[0] in options:
         device = options[hero_string[0]]
         hero = hero_string[1:]
@@ -79,10 +75,8 @@ def parse_device_options(hero_string, options):
         hero = hero_string
     return hero, device
 
-#parse_device_options('D.Va', options)
-
 def enter_hero_name(hero_list, options):
-    """Prompts for hero name."""
+    """Prompts for hero name or other commands."""
     print ("Enter Exact Hero Name Or Type ?help for more options.")
     
     hero, device = parse_device_options( raw_input('Enter Hero:'), options)
@@ -111,6 +105,7 @@ def enter_hero_name(hero_list, options):
         enter_hero_name(hero_list, options)
 
 def select_hero(hero_list):
+    """Selects hero you'd like to request."""
     for i in range(0,len(hero_list)):
         print str(i) + ': ' + hero_list[i]
     hero_index = int(raw_input('Select Hero Number:'))
@@ -119,6 +114,7 @@ def select_hero(hero_list):
 
 
 def parse_hero_for_url(hero):
+    """Replaces characters with URL-friendly characters."""
     name = ''
     for i in range(0,len(hero)):
         if hero[i] == ' ':
@@ -154,17 +150,21 @@ def strip_device(device):
 
 def request_variables(variables, file_name):
     """Requsests the variables from the user."""
-    
+    # Prompt for API Key
     variables['api_key'] = raw_input('Enter Pushbullet API Key:')
+    # Set the API Key within the Pushbullet wrapper
     pb = Pushbullet(variables['api_key'])
+    # Query devices in Pushbullet account.
     devices = pb.devices
-    #print devices
+    # Print the devices in the account
     for i in range(0,len(devices)):
         print str(i) + ': ' + str(devices[i])
+    # Assign devices
     variables['phone'] = strip_device(devices[int(raw_input('Select Phone: Enter Item Number in list 0 to %s\n' % len(devices)))])
     #print variables['phone']
     variables['tablet'] = strip_device(devices[int(raw_input('Select Tablet: Enter Item Number in list 0 to %s\n' % len(devices)))])
     #print variables['tablet']
+    # Write to the variables file.
     write_variables(variables, file_name)
     return variables
     
