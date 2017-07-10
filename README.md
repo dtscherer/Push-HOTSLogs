@@ -3,7 +3,45 @@
 A Python app that enables you to lookup the hero pages on HOTSLogs and push them to your browser, your phone, or your tablet using Pushbullet.
 
 
+----------------------------------------------------
+How To Use:
+----------------------------------------------------
+
 Use the shortcut Ctrl + Windows Key + H to open the console Window.
+
+Either enter a hero name exactly or use ?list to choose from a list of heroes.
+
+While HOTSLogs.com's hero URLs are case sensitive this script correctly capitalizes the names. 
+However, while capitalization does not matter, apostrophes, spaces and dashes DO matter.
+So if you don't know how to exactly spell the name of a hero, use the ?list command below.
+
+Entering a hero's name into the console without a modifier will send the hero's HOTSLogs page to your default browser.
+
+Commands:
+?list
+This list of heroes is scraped from the front page of HOTSLogs and then sorted alphabetically.
+
+?help
+This will list the various commands you can make.
+
+?setup
+This will allow you to reset the configuration files for the script.
+You'll have to re-enter the authentication token as well as the devices that correspond to the modifiers.
+
+Modifiers:
+These modifiers will send your hero request to your other devices. These are placed in front of the hero name or in front of ?list.
+
+!
+Pushes the link for the hero you would like to request to the device you selected as your phone.
+
+#
+Pushes the link for the hero you would like to request to the device you selected as your tablet.
+
+Examples:
+
+!D.Va sends D.Va's HOTSLogs page to your phone.
+
+#?list sends the hero you choose from the list to your tablet.
 
 
 ----------------------------------------------------
