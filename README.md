@@ -1,6 +1,6 @@
 # Push HOTSLogs
 
-A Python app that enables you to lookup the hero pages on HOTSLogs and push them to your browser, your phone, or your tablet using Pushbullet.
+A Python app that enables you to lookup the hero pages on HOTSLogs via a console window and push them to your browser, your phone, or your tablet using Pushbullet.
 
 
 ----------------------------------------------------
@@ -57,11 +57,11 @@ Let me know if that's the case.
 First run the setup.bat file in the Open HOTSLogs Page folder as Administrator.
 The batch file needs Administrator access to create a task in Task Scheduler.
 
-Then the script will download & silently install Autohotkey from https://autohotkey.com/
+Then the script will download & silently install AutoHotkey (AHK) from https://autohotkey.com/
 This allows you to access the script by pressing Ctrl + Windows Key + H.
 
-The setup file will then set up a task in Task Scheduler to run the AutoHotkey Script by importing the xml file in the folder.
-This task will cause the AutoHotKey (AHK} script to run at startup.
+The setup file will then set up a task in Task Scheduler to run the AHK Script by importing the xml file in the folder.
+This task will cause the AHK script to run at startup and at 6AM just in case it gets closed.
 
 
 ----------------------------------------------------
